@@ -1,0 +1,4 @@
+import world
+
+Grids = World()
+
