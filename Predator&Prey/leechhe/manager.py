@@ -1,5 +1,6 @@
-import rabbit
-import world
+from random import shuffle
+from rabbit import RabbitManager
+from fox import FoxManager
 
 class GameManager:
 	def __init__(self):
@@ -27,14 +28,17 @@ class GameManager:
 		self.time_step = 1
 
 	def gameOver(self):
+		print('O :' + str(self.rabbit_manager.count()))
+		print('X :' + str(self.fox_manager.count()))
 		return self.rabbit_manager.count() == 0 or self.fox_manager.count() == 0
 
 	def showTimeStep(self):
 		print("Time_step : %d" %(self.time_step))
-		print()
+		self.rabbit_manager.showState()
+		self.fox_manager.showState()
 
 	def drawWorld(self):
-		for line in grids :
+		for line in self.grids :
 			print(' '.join(line))
 		print()
 

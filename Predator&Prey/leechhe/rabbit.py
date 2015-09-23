@@ -1,4 +1,4 @@
-import animal
+from animal import Animal, AnimalManager
 
 class Rabbit(Animal):
 	def __init__(self, _pos):
@@ -13,9 +13,18 @@ class Rabbit(Animal):
 
 		return Rabbit(breed_position)
 
+	def move(self, grids):
+		new_position = super(Rabbit, self).move(grids)
+		if new_position is not None :
+			#Set new position
+			print('O at', end="")
+			print(self.position, end="")
+			print('to', end="")
+			print(new_position)
+			self.position = new_position
 
 class RabbitManager(AnimalManager):
 	def __init__(self, _positions):
 		super(RabbitManager, self).__init__()
-		self._animals = [ Rabbit(position, 'O') for position in _positions]
+		self._animals = [ Rabbit(position) for position in _positions]
 
