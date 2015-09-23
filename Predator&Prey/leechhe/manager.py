@@ -28,14 +28,14 @@ class GameManager:
 		self.time_step = 1
 
 	def gameOver(self):
-		print('O :' + str(self.rabbit_manager.count()))
-		print('X :' + str(self.fox_manager.count()))
+		#print('O :' + str(self.rabbit_manager.count()))
+		#print('X :' + str(self.fox_manager.count()))
 		return self.rabbit_manager.count() == 0 or self.fox_manager.count() == 0
 
 	def showTimeStep(self):
 		print("Time_step : %d" %(self.time_step))
-		self.rabbit_manager.showState()
-		self.fox_manager.showState()
+		#self.rabbit_manager.showState()
+		#self.fox_manager.showState()
 
 	def drawWorld(self):
 		for line in self.grids :
@@ -43,12 +43,19 @@ class GameManager:
 		print()
 
 	def move(self):
+		hunted = self.fox_manager.move(self.grids)
+
+		for rabbit_position in hunted:
+			print("Rabbit on ", end="")
+			print(rabbit_position, end="")
+			print("is hunted.")
+			self.rabbit_manager.hunted(rabbit_position)
+		
+		self.fox_manager.starve(self.grids)
+		self.fox_manager.breed(self.grids)
+
 		self.rabbit_manager.move(self.grids)
 		self.rabbit_manager.breed(self.grids)
-
-		self.fox_manager.move(self.grids)
-		self.fox_manager.starve()
-		self.fox_manager.breed(self.grids)
 
 	def increaseTime(self):
 		self.time_step += 1

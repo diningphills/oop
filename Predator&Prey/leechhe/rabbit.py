@@ -17,10 +17,6 @@ class Rabbit(Animal):
 		new_position = super(Rabbit, self).move(grids)
 		if new_position is not None :
 			#Set new position
-			print('O at', end="")
-			print(self.position, end="")
-			print('to', end="")
-			print(new_position)
 			self.position = new_position
 
 class RabbitManager(AnimalManager):
@@ -28,3 +24,5 @@ class RabbitManager(AnimalManager):
 		super(RabbitManager, self).__init__()
 		self._animals = [ Rabbit(position) for position in _positions]
 
+	def hunted(self, pos):
+		self._animals = list(filter(lambda rabbit : not all(p == q for p, q in zip(rabbit.position, pos)), self._animals ))

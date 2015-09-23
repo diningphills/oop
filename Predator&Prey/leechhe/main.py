@@ -2,12 +2,14 @@ from manager import GameManager
 
 if __name__ == "__main__" :
 	manager = GameManager()
-	while not manager.gameOver():
+	while True:
 		manager.showTimeStep()
 		manager.drawWorld()
 		input("Press Enter to proceed.")
+		if manager.gameOver() : break;
 		manager.move()
 		manager.increaseTime()
+
 
 	#draw world
 
